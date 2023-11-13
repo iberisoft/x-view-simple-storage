@@ -11,7 +11,10 @@ if (args.Length < 2)
 }
 
 var file = DicomFile.Open(args[0]);
-var image = new DicomImage(file.Dataset);
+var image = new DicomImage(file.Dataset)
+{
+    ShowOverlays = false
+};
 using var renderedImage = image.RenderImage();
 using var bitmap = renderedImage.AsSharpImage();
 bitmap.Save(args[1]);
