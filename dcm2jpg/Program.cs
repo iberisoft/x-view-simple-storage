@@ -1,8 +1,10 @@
-﻿using Dicom;
-using Dicom.Imaging;
+﻿using FellowOakDicom;
+using FellowOakDicom.Imaging;
 using SixLabors.ImageSharp;
 
-ImageManager.SetImplementation(new ImageSharpImageManager());
+new DicomSetupBuilder()
+    .RegisterServices(services => services.AddFellowOakDicom().AddImageManager<ImageSharpImageManager>())
+    .Build();
 
 if (args.Length < 2)
 {
