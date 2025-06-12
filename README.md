@@ -7,7 +7,7 @@ The `dcm2jpg` tool is used to convert DICOM files to JPEG for prerendering.
 ## Prerequisites
 
 * [Node.js](https://nodejs.org)
-* [.NET 6](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+* [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 ## Dependencies
 
