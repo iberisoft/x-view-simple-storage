@@ -1,6 +1,6 @@
 {
     "name": "simple-storage",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "DICOM image viewer service",
     "main": "src/app.js",
     "scripts": {
