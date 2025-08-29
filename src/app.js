@@ -19,17 +19,27 @@ if (!rootPath) {
 app.get('/storage/:folderName', async (request, response) => {
     const dirPath = path.join(rootPath, request.params.folderName);
     console.log(`Reading ${dirPath}`);
-    const fileNames = (await fsp.readdir(dirPath)).filter(fileName => path.extname(fileName).toLowerCase() == '.dcm');
-    response.json(fileNames);
+    try {
+        const fileNames = (await fsp.readdir(dirPath)).filter(fileName => path.extname(fileName).toLowerCase() == '.dcm');
+        response.json(fileNames);
+    }
+    catch (err) {
+        console.error(err);
+    }
 });
 
 app.get('/storage/:folderName/:fileName', (request, response) => {
     const filePath = path.join(rootPath, request.params.folderName, request.params.fileName);
     console.log(`Downloading ${filePath}`);
-    if (path.extname(filePath) == '.jpg' && !fs.existsSync(filePath)) {
-        createJpegFile(filePath.substring(0, filePath.lastIndexOf('.')) + '.dcm', filePath);
+    try {
+        if (path.extname(filePath) == '.jpg' && !fs.existsSync(filePath)) {
+            createJpegFile(filePath.substring(0, filePath.lastIndexOf('.')) + '.dcm', filePath);
+        }
+        response.download(filePath);
     }
-    response.download(filePath);
+    catch (err) {
+        console.error(err);
+    }
 });
 
 app.listen(settings.port, () => {
