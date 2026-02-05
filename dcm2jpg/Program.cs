@@ -1,9 +1,12 @@
 ﻿using FellowOakDicom;
 using FellowOakDicom.Imaging;
+using FellowOakDicom.Imaging.NativeCodec;
 using SixLabors.ImageSharp;
 
 new DicomSetupBuilder()
-    .RegisterServices(services => services.AddFellowOakDicom().AddImageManager<ImageSharpImageManager>())
+    .RegisterServices(services => services.AddFellowOakDicom()
+        .AddImageManager<ImageSharpImageManager>()
+        .AddTranscoderManager<NativeTranscoderManager>())
     .Build();
 
 if (args.Length < 2)
